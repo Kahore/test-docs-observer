@@ -6,6 +6,7 @@ export class DocumentListAdapter {
 		  return documents.map(document=>{
 				return {
 					...document,
+					formattedVersion:  `Version: ${document.version}`,
 					formattedCreatedAt:  FormatDate.getHumanizedDateTime(document.createdAt),
 					formattedUpdatedAt:  FormatDate.getHumanizedDateTime(document.updatedAt),
 				}
@@ -14,6 +15,7 @@ export class DocumentListAdapter {
 }
 
 export interface VDocument extends EDocument {
+	formattedVersion: string
 	formattedCreatedAt: string
 	formattedUpdatedAt: string
 }

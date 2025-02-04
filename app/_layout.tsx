@@ -5,14 +5,14 @@ import * as SplashScreen from 'expo-splash-screen';
 import { StatusBar } from 'expo-status-bar';
 import { useEffect } from 'react';
 import 'react-native-reanimated';
-
-import { useColorScheme } from '@/hooks/useColorScheme';
+import {AppContext} from "@/config/context";
+import appContainer from "@/config/container";
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
 
 export default function RootLayout() {
-  const colorScheme = useColorScheme();
+
   const [loaded] = useFonts({
     SpaceMono: require('../assets/fonts/SpaceMono-Regular.ttf'),
   });
@@ -28,12 +28,14 @@ export default function RootLayout() {
   }
 
   return (
-    <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-      <Stack>
-        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-        <Stack.Screen name="+not-found" />
-      </Stack>
-      <StatusBar style="auto" />
-    </ThemeProvider>
+    <AppContext.Provider value={appContainer}>
+      <ThemeProvider value={DefaultTheme}>
+        <Stack >
+          <Stack.Screen name="index"  />
+          <Stack.Screen name="documents" options={{ headerShown: true, title: 'Documents' }} />
+        </Stack>
+        <StatusBar style="auto" />
+      </ThemeProvider>
+    </AppContext.Provider>
   );
 }

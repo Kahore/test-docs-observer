@@ -8,7 +8,8 @@ export class NotificationRepository {
 		this.wsClient = wsClient;
 	}
 
-	getNotifications(callback: (data: NotificationResponse[]) => void): void {
+	getNotifications(callback: (data: NotificationResponse) => void): void {
+		this.wsClient.connect();
 		this.wsClient.on("message", callback);
 	}
 

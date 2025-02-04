@@ -13,7 +13,7 @@ export class WebSocketClient {
 		this.socket = new WebSocket(this._url);
 
 		this.socket.onopen = () => this._emit("open", null);
-		this.socket.onmessage = (event) => this._emit("message", event.data);
+		this.socket.onmessage = (event) => this._emit("message", JSON.parse(event.data));
 		this.socket.onerror = (event) => this._emit("error", event);
 		this.socket.onclose = () => this._emit("close", null);
 	}

@@ -1,1 +1,1 @@
-export * from './NotificationList.adapter'
+export * from './Notification.adapter'
